@@ -5,13 +5,11 @@ import { MergedTimesheetData, TimesheetData } from "./types";
 import {
   DataGrid,
   GridRenderCellParams,
-  GridRowParams,
   GridToolbarContainer,
   GridToolbarExport,
 } from "@mui/x-data-grid";
 import { Box, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { format } from "date-fns";
-import { getJsDateFromExcel } from "excel-date-to-js";
 
 function ExcelDateToJSDate(serial: number) {
   var utc_days = Math.floor(serial - 25569);
@@ -54,7 +52,6 @@ const months = [
   "December",
 ];
 
-const currentYear = new Date().getFullYear();
 const currentMonth = new Date().getMonth() + 1;
 
 function CustomToolbar() {

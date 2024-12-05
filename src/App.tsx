@@ -75,7 +75,7 @@ function App() {
       const parsed: Record<string, string>[] = JSON.parse(json);
       const newEmails: string[] = [];
       const mapped = parsed.map((item) => {
-        const date = item["09/26/2024"] || item["11/19/2024"];
+        const date = item["Date"];
         if (!newEmails.includes(item["Email"])) {
           newEmails.push(item["Email"]);
         }
@@ -86,7 +86,7 @@ function App() {
           email: item["Email"],
           name: item["Name"],
           date: ExcelDateToJSDate(+date),
-          type: item["Time In/Out"],
+          type: item["Time In"],
           remarks: item["Remarks"],
         } as TimesheetData;
       });
@@ -95,7 +95,6 @@ function App() {
     },
     [setData, month]
   );
-  console.log("emails", emails);
   const filterByMonth = useCallback(
     (event: SelectChangeEvent) => {
       const month = parseInt(event.target.value);
@@ -148,6 +147,7 @@ function App() {
             : item.startTime.getDate() > 15
         )
         .map((item) => {
+          console.log("item", item);
           const date = format(item.date, "MM/dd/yyyy");
 
           // const merged: MergedTimesheetData = []
@@ -245,7 +245,7 @@ function App() {
               field: "timeIn",
               headerName: "Morning In",
               valueFormatter: (params: Date) => {
-                return format(params, "hh:mm a");
+                return format(params, "hh:mm a") ?? "";
               },
             },
             {

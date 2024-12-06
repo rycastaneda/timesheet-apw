@@ -75,7 +75,7 @@ function App() {
       const parsed: Record<string, string>[] = JSON.parse(json);
       const newEmails: string[] = [];
       const mapped = parsed.map((item) => {
-        const date = item["Date"];
+        const date = item["date"];
         if (!newEmails.includes(item["Email"])) {
           newEmails.push(item["Email"]);
         }
